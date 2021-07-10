@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  test 'product is not valid withou a unque title' do
+  test 'product is not valid if the length of title less than 10 characters' do
+    product = new_product(title: 'yyy')
+    assert product.invalid?
+    assert_equal [I18n.t('errors.messages.too_short', count: 10)], product.errors[:title]
+  end
+
+  test 'product is not valid without a unique title' do
     product = new_product(title: products(:ruby).title)
     assert product.invalid?
     assert_equal [I18n.t('errors.messages.taken')], product.errors[:title]
