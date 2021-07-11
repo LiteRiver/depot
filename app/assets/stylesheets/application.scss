@@ -84,13 +84,30 @@ header.main {
   }
 }
 
-.notice,#notice {
+.notice,
+#notice {
   background-color: #ffb;
-  border-radius: .5em;
-  border: .177em solid #882;
+  border-radius: 0.5em;
+  border: 0.177em solid #882;
   color: #882;
   font-weight: bold;
   margin-bottom: 1em;
   padding: 1em 1.414em;
   text-align: center;
+}
+
+#cart {
+  article {
+    h2 {
+      margin-top: 0;
+    }
+
+    background-color: white;
+    border-radius: 0.5em;
+    margin: 1em;
+    padding: 1.414em;
+    @media (min-width: 50em) {
+      margin: 0;
+    }
+  }
 }
