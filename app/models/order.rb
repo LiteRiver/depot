@@ -16,4 +16,8 @@ class Order < ApplicationRecord
       line_items << item
     end
   end
+
+  def total_price
+    line_items.sum(&:total_price)
+  end
 end

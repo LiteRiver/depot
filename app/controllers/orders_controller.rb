@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
   include CurrentCart
 
+  before_action :set_in_checkout
   before_action :set_cart, only: %i[new create]
-  before_action :ensure_cart_not_empty, only: %i[new]
+  before_action :ensure_cart_not_empty, only: %i[new create]
   before_action :set_order, only: %i[show edit update destroy]
 
   # GET /orders or /orders.json
@@ -62,6 +63,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_in_checkout
+    @checkout_in_progress = true
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
