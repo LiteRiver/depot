@@ -4,8 +4,10 @@ one:
   product: two
   cart: one
   unit_price: 9.99
+  quantity: 1
 
 two:
-  product: two
-  cart: two
+  product: ruby
+  cart: one
   unit_price: 9.99
+  quantity: 1

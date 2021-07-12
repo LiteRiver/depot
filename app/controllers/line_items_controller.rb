@@ -28,6 +28,10 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_index_url }
+        format.js do
+          @current_item = @line_item
+          render 'carts/update_cart'
+        end
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,9 +43,23 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1 or /line_items/1.json
   def update
     respond_to do |format|
-      if @line_item.update(line_item_params)
+      quantity = line_item_params[:quantity].to_i
+
+      if quantity < 1
+        @line_item.destroy!
+        format.html { redirect_to @cart, notice: 'Line item was successfully destroyed.' }
+        format.json { head :no_content }
+        format.js do
+          @current_item = @line_item
+          render 'carts/update_cart'
+        end
+      elsif @line_item.update(line_item_params)
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
         format.json { render :show, status: :ok, location: @line_item }
+        format.js do
+          @current_item = @line_item
+          render 'carts/update_cart'
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -51,10 +69,11 @@ class LineItemsController < ApplicationController
 
   # DELETE /line_items/1 or /line_items/1.json
   def destroy
-    @line_item.destroy
+    @line_item.destroy!
     respond_to do |format|
       format.html { redirect_to @cart, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render 'carts/update_cart' }
     end
   end
 
@@ -65,6 +84,6 @@ class LineItemsController < ApplicationController
   end
 
   def line_item_params
-    params.require(:line_item).permit(:product_id)
+    params.require(:line_item).permit(:quantity)
   end
 end

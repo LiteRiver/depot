@@ -53,3 +53,18 @@
     }
   }
 }
+
+@keyframes product-highlight {
+  0% {
+    background-color: #8f8;
+  }
+
+  100% {
+    background-color: none;
+  }
+}
+
+.product-highlight {
+  animation: line-item-highlight 1s;
+}
+

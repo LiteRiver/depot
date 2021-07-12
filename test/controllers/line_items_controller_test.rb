@@ -26,6 +26,16 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select '.carts td', 'Programming Ruby 1.9'
   end
 
+  test 'should create line_item via ajax' do
+    assert_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:ruby).id }, xhr: true
+    end
+
+    assert_response(:success)
+
+    assert_match(/<tr class=\\"line-item-highlight/, @response.body)
+  end
+
   test 'should show line_item' do
     open_session do
       post line_items_url, params: { product_id: products(:ruby).id }
@@ -51,7 +61,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
       post line_items_url, params: { product_id: products(:ruby).id }
       cart = Cart.find(session[:cart_id])
       item = cart.line_items.last
-      patch line_item_url(item), params: { line_item: { product_id: @line_item.product_id } }
+      patch line_item_url(item), params: { line_item: { quantity: 2 } }
       assert_redirected_to line_item_url(item)
     end
   end
