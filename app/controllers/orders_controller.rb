@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
+        OrderMailer.received(@order).deliver_later
         format.html { redirect_to store_index_url, notice: 'Thank you for your order' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -71,6 +72,19 @@ class OrdersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def pay_type_params
+    case order_params[:pay_tyoe]
+    when  'Credit Card'
+      params.require(:order).permit(:credit_card_number, :expiration_date)
+    when  'Check'
+      params.require(:order).permit(:account_number, :routing_number)
+    when  'Purchase Order'
+      params.require(:order).permit(:po_number)
+    else
+      {}
+    end
   end
 
   # Only allow a list of trusted parameters through.
