@@ -4,15 +4,13 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @line_item = line_items(:one)
     @cart = carts(:one)
+    @user = users(:one)
   end
 
   test 'should get index' do
-    get line_items_url
-    assert_response :success
-  end
+    login_as(@user)
 
-  test 'should get new' do
-    get new_line_item_url
+    get line_items_url
     assert_response :success
   end
 

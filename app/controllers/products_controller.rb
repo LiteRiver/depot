@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  skip_before_action :authorize, only: %i[who_bought]
+  before_action :basic_auth, only: %i[who_bought]
   before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products or /products.json
@@ -80,5 +82,11 @@ class ProductsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def product_params
     params.require(:product).permit(:title, :description, :image_url, :price)
+  end
+
+  def basic_auth
+    authenticate_or_request_with_http_basic do |name, password|
+      User.find_by_name(name)&.authenticate(password)
+    end
   end
 end

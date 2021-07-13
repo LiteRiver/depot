@@ -4,19 +4,26 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:one)
     @title = "The Great Book #{rand(1000)}"
+    @user = users(:one)
   end
 
   test 'should get index' do
+    login_as(@user)
+
     get products_url
     assert_response :success
   end
 
   test 'should get new' do
+    login_as(@user)
+
     get new_product_url
     assert_response :success
   end
 
   test 'should create product' do
+    login_as(@user)
+
     assert_difference('Product.count') do
       post products_url,
            params: {
@@ -33,16 +40,22 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show product' do
+    login_as(@user)
+
     get product_url(@product)
     assert_response :success
   end
 
   test 'should get edit' do
+    login_as(@user)
+
     get edit_product_url(@product)
     assert_response :success
   end
 
   test 'should update product' do
+    login_as(@user)
+
     patch product_url(@product),
           params: {
             product: {
@@ -56,6 +69,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy product' do
+    login_as(@user)
+
     assert_difference('Product.count', -1) do
       delete product_url(@product)
     end
@@ -64,6 +79,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can't delete product in cart" do
+    login_as(@user)
+
     assert_difference('Product.count', 0) do
       delete product_url(products(:two))
     end

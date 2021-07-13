@@ -78,6 +78,26 @@ header.main {
       }
     }
   }
+   
+  nav.admin-nav {
+    border-top: thin solid #bfb;
+    padding: .354em 0;
+    margin-top: .354em;
+
+    input[type="submit"] {
+      background: none;
+      border: none;
+      color: #bfb;
+      font-size: 1em;
+      letter-spacing: .354em;
+      margin: 0;
+      padding: 0;
+      text-transform: uppercase;
+      &:hover {
+        color: white;
+      }
+    }
+  }
 
   main {
     padding: 0.5em;

@@ -3,15 +3,13 @@ require 'test_helper'
 class CartsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @cart = carts(:one)
+    @user = users(:one)
   end
 
   test 'should get index' do
-    get carts_url
-    assert_response :success
-  end
+    login_as(users(:one))
 
-  test 'should get new' do
-    get new_cart_url
+    get carts_url
     assert_response :success
   end
 
@@ -24,11 +22,15 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show cart' do
+    login_as(@user)
+
     get cart_url(@cart)
     assert_response :success
   end
 
   test 'should get edit' do
+    login_as(@user)
+
     get edit_cart_url(@cart)
     assert_response :success
   end

@@ -18,11 +18,11 @@
     <%= form.label :email %>
     <%= form.email_field :email, size: 40, autocomplete: 'off' %>
   </div>
-  <div id="pay-type-component"></div>
   <div class="field">
     <%= form.label :address %>
     <%= form.text_area :address, rows: 3, cols: 40 %>
   </div>
+  <div id="pay-type-component"></div>
   <div class="actions">
     <%= form.submit 'Place Order' %>
   </div>
