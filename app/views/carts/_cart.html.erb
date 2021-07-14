@@ -22,6 +22,6 @@
 
   <%= button_to 'Empty Cart', cart, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
   <% unless @checkout_in_progress %>
-    <%= button_to 'Checkout', new_order_path, method: :get, class: 'checkout' %>
+    <%= button_to 'Checkout', new_order_path(locale: I18n.locale), method: :get, class: 'checkout' %>
   <% end %>
 </article>

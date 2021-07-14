@@ -22,13 +22,13 @@
         </div>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="/"><%= t '.home' %></a>
           </li>
-          <li><a href="/questions">Questions</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/questions"><%= t '.questions' %></a></li>
+          <li><a href="/news"><%= t '.news' %></a></li>
+          <li><a href="/contact"><%= t '.contact' %></a></li>
           <% unless session[:user_id] || controller.controller_name == 'sessions' && controller.action_name == 'new' %>
-            <li><%= link_to 'Login', login_path %></li>
+            <li><%= link_to t('.login'), login_path %></li>
           <% end %>
         </ul>
         <% if session[:user_id] %>
