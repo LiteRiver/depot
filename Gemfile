@@ -32,7 +32,14 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+group :development do
+  gem 'capistrano', '~> 3.16.0'
+  gem 'capistrano-bundler', '~> 2.0'
+  gem 'capistrano-passenger', '~> 0.2.1'
+  gem 'capistrano-rails', '~> 1.6.1'
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-sidekiq', '~> 2.0'
+end
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
