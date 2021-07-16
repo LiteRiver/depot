@@ -10,7 +10,7 @@ set :conditionally_migrate, true
 set :assets_roles, %i[web]
 set :assets_prefix, 'assets'
 set :deploy_to, "/projects/#{fetch(:application)}"
-append :linked_files, 'config/master.key'
+append :linked_files, 'config/master.key', 'db/production.sqlite3'
 append :linked_dirs, '.bundle'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 

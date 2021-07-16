@@ -9,7 +9,7 @@ gem 'activemodel-serializers-xml', '~> 1.0', '>= 1.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 5.3', '>= 5.3.2'
 # Use SCSS for stylesheets
 gem 'sassc-rails', '~> 2.1'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,11 +34,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano', '~> 3.16.0'
-  gem 'capistrano-bundler', '~> 2.0'
-  gem 'capistrano-passenger', '~> 0.2.1'
   gem 'capistrano-rails', '~> 1.6.1'
   gem 'capistrano-rbenv', '~> 2.2'
   gem 'capistrano-sidekiq', '~> 2.0'
+  gem 'capistrano3-puma', '~> 5.0', '>= 5.0.4'
 end
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -27,19 +27,23 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/passenger
 #
 # require "capistrano/rvm"
-require 'capistrano/rbenv'
 # require "capistrano/chruby"
+require 'capistrano/rbenv'
+require 'capistrano/puma'
 require 'capistrano/bundler'
-require 'capistrano/rails'
 require 'capistrano/rails/assets'
-require 'capistrano/rails/migrations'
-require 'capistrano/passenger'
+
+install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma::Systemd
+install_plugin Capistrano::Puma::Workers
+install_plugin Capistrano::Puma::Monit
+install_plugin Capistrano::Puma::Nginx
 
 set :rbenv_type, :user
 set :rbenv_custom_path, '/usr/local/.rbenv'
 set :rbenv_ruby, File.read('.ruby-version').strip
-set :rbenv_prefix,
-    "RBENV_ROOT=#{fetch(:rbenv_custom_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_custom_path)}/bin/rbenv exec"
+# set :rbenv_prefix,
+#     "RBENV_ROOT=#{fetch(:rbenv_custom_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_custom_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
