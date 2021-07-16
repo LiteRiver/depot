@@ -36,7 +36,7 @@ require 'capistrano/rails/assets'
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
 install_plugin Capistrano::Puma::Workers
-install_plugin Capistrano::Puma::Monit
+# install_plugin Capistrano::Puma::Monit
 install_plugin Capistrano::Puma::Nginx
 
 set :rbenv_type, :user

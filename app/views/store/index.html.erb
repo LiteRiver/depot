@@ -4,12 +4,11 @@
   </aside>
 <% end %>
 <h1><%= t '.title_html' %></h1>
-<h2>This is a test</h2>
 <ul class="catalog">
   <% cache @products  do%>
     <% @products.each do |product| %>
       <% cache product do %>
-        <li class="<%= @product&.id == product.id ? 'product-highlight' : '' %>">
+        <li class="<%= @product&.id == product.id ? 'product-highlight' : '' %>" data-id="<%= product.id %>">
           <%= link_to line_items_path(product_id: product.id), remote: true, method: :post do%>
             <%= image_tag(product.image_url) %>
           <% end %>
